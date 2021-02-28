@@ -1,6 +1,6 @@
 FROM alpine
 LABEL AUTHOR="Akira <e.akimoto.akira@gmail.com>" \
-        VERSION=0.0.7 \
+        VERSION=0.0.8 \
         UPDATE_CONTENT="增加汽车之家极速版及相关配置更新,修正汽车之家极速版多账号执行异常bug，请参考dockerhub仓库(https://hub.docker.com/r/akyakya/pack_some_script)readme配置"
 
 RUN set -ex \
@@ -24,7 +24,7 @@ RUN mkdir /logs \
         && mkdir /pss \
         && cd  /pss \
         && git init \
-        && git remote add -f origin https://github.com/iouAkira/someDockerfile.git \
+        && git remote add -f origin https://github.com/hellowjjb/someDockerfile.git \
         && git config core.sparsecheckout true \
         && echo pack_some_script/* >> /pss/.git/info/sparse-checkout \
         && git pull origin master \
@@ -38,13 +38,13 @@ RUN git clone https://github.com/Zero-S1/xmly_speed.git /xmly_speed \
         && pip3 install -r requirements.txt
 
 # 支持多账号企鹅阅读的仓库
-RUN git clone https://github.com/ziye12/JavaScript.git /qqread \
+RUN git clone https://github.com/hellowjjb/qqreader2021.git /qqread \
         && cd /qqread \
         && git checkout master \
         && npm install
 
 # 支持多账号汽车之家的仓库
-RUN git clone https://github.com/ziye12/QCZJSPEED.git /QCZJSPEED
+RUN git clone https://github.com/hellowjjb/QCZJ_SPEED.git /QCZJSPEED
 
 
 # github action 构建
