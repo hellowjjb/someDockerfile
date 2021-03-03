@@ -3,7 +3,7 @@ set -e
 
 ######################################获取docker构建文件里面的自定义信息方法-start#####################################################
 function getDockerImageLabel() {
-    repo=akyakya/pack_some_script
+    repo=hellowjjb/qqjscript
     imageTag=latest
     token=$(curl -s "https://auth.docker.io/token?service=registry.docker.io&scope=repository:${repo}:pull" | jq -r '.token')
     digest=$(curl -s -H "Accept: application/vnd.docker.distribution.manifest.v2+json" -H "Authorization: Bearer $token" "https://registry-1.docker.io/v2/${repo}/manifests/${imageTag}" | jq .config.digest -r)
@@ -32,7 +32,7 @@ else
     # 第一版通知逻辑无法包含在上面判断里面，镜像构建好直接开启通知
     echo "Current container version is too old, send update notification"
     echo "当前版本过旧，发送镜像更新通知"
-    export IMAGE_UPDATE_CONTENT="调整镜像启动入口文件，增加一些自定义，如要更新使用请重新阅读一遍dockerhub镜像地址的readme(https://hub.docker.com/repository/docker/akyakya/pack_some_script)"
+    export IMAGE_UPDATE_CONTENT="调整镜像启动入口文件，增加一些自定义，如要更新使用请重新阅读一遍dockerhub镜像地址的readme(https://hub.docker.com/repository/docker/hellowjjb/qqjscript)"
     cd /pss
     python3 send_notify.py
 fi
